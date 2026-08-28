@@ -47,7 +47,7 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-s
 .body-sm{font-size:13px;color:var(--text-sub);line-height:1.65;}
 
 /* gold button */
-.btn-gold{background:var(--gold);color:#07090F;border:none;padding:15px 44px;font-size:14px;font-weight:500;font-family:'Inter',sans-serif;cursor:pointer;letter-spacing:0.04em;border-radius:var(--radi[...]
+.btn-gold{background:var(--gold);color:#07090F;border:none;padding:15px 44px;font-size:14px;font-weight:500;font-family:'Inter',sans-serif;cursor:pointer;letter-spacing:0.04em;border-radius:var(--radius);transition:opacity 0.2s;}
 .btn-gold:hover{opacity:0.88;}
 .btn-gold:disabled{background:var(--text-muted);color:var(--bg);cursor:default;opacity:1;}
 
@@ -65,12 +65,12 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-s
 .q-limit{font-size:11px;color:var(--gold);margin-bottom:18px;letter-spacing:0.05em;}
 
 /* options */
-.opt{display:flex;align-items:center;gap:12px;width:100%;background:var(--surface);border:0.5px solid var(--border);color:var(--text-sub);padding:13px 16px;text-align:left;font-size:14px;cursor:pointe[...]
-.opt:hover{border-color:var(--border-strong);color:var(--text);} 
-.opt.selected{background:var(--gold-bg);border-color:var(--gold);color:var(--text);} 
-.opt.disabled-opt{opacity:0.35;cursor:default;} 
-.indicator{width:16px;height:16px;min-width:16px;border:0.5px solid var(--border-strong);display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--bg);transition:background 0.1[...]
-.opt.selected .indicator{background:var(--gold);border-color:var(--gold);} 
+.opt{display:flex;align-items:center;gap:12px;width:100%;background:var(--surface);border:0.5px solid var(--border);color:var(--text-sub);padding:13px 16px;text-align:left;font-size:14px;cursor:pointer;border-radius:var(--radius);margin-bottom:8px;transition:border-color 0.15s,background 0.15s,color 0.15s;font-family:'Inter',sans-serif;}
+.opt:hover{border-color:var(--border-strong);color:var(--text);}
+.opt.selected{background:var(--gold-bg);border-color:var(--gold);color:var(--text);}
+.opt.disabled-opt{opacity:0.35;cursor:default;}
+.indicator{width:16px;height:16px;min-width:16px;border:0.5px solid var(--border-strong);display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--bg);transition:background 0.15s,border-color 0.15s;}
+.opt.selected .indicator{background:var(--gold);border-color:var(--gold);}
 
 /* nav row */
 .nav-row{display:flex;justify-content:space-between;align-items:center;margin-top:28px;}
@@ -95,7 +95,7 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-s
 /* stat row */
 .stat-row{display:flex;justify-content:center;gap:44px;flex-wrap:wrap;margin-bottom:48px;}
 .stat{text-align:center;}
-.stat-n{font-family:'Playfair Display',serif;font-size:22px;font-weight:600;color:var(--gold);} 
+.stat-n{font-family:'Playfair Display',serif;font-size:22px;font-weight:600;color:var(--gold);}
 .stat-l{font-size:12px;color:var(--text-muted);margin-top:2px;}
 
 /* error */
@@ -359,7 +359,7 @@ async function submit(){
   }).filter(Boolean).join('\n');
 
   try{
-    const res=await fetch('/.netlify/functions/claude',{
+    const res=await fetch('/api/claude',{
       method:'POST',
       headers:{'Content-Type':'application/json'},
       body:JSON.stringify({
@@ -391,7 +391,7 @@ Selection rules:
 - "first_directive": one specific, actionable thing this executive does first for THIS person
 
 Return ONLY valid JSON — no markdown fences, no explanation, just the object:
-{"board_summary":"2-3 sentences about their situation and what this board will accomplish","board_name":"Sharp personalized name for their board","members":[{"id":"chief_of_staff","role":"AI Chief of [...]
+{"board_summary":"2-3 sentences about their situation and what this board will accomplish","board_name":"Sharp personalized name for their board","members":[{"id":"chief_of_staff","role":"AI Chief of Staff","abbr":"CoS","why":"Personalized reason","first_directive":"First specific action","priority":"essential"}]}
 
 Priority values: essential | high | recommended`,
         messages:[{role:'user',content:`My assessment answers:\n\n${summary}`}]
